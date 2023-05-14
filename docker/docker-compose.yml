@@ -1,0 +1,31 @@
+version: '3.3'
+services:
+  web-microservice:
+      container_name: product-catalog
+      build:
+        context: product-catalog-server
+        dockerfile: DockerFile
+      image: product-catalog:latest
+      ports:
+        - 8085:8085
+      networks:
+        - catalog-network
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'productcatalog'
+      MYSQL_USER: 'product'
+      MYSQL_PASSWORD: 'catalog123'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - my-db:/var/lib/mysql
+    networks:
+      - catalog-network
+# Names our volume
+volumes:
+  my-db:

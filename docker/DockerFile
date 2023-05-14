@@ -1,0 +1,4 @@
+FROM openjdk:8-jdk-alpine
+MAINTAINER eduardo
+COPY ../target/CatalogoProdutos-0.0.1-SNAPSHOT.jar CatalogoProdutos-0.0.1.jar
+ENTRYPOINT ["java","-jar","/CatalogoProdutos-0.0.1"]
